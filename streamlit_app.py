@@ -68,6 +68,14 @@ with st.expander("About this app"):
     💡 For decent answers, you'd want to increase the `Max Tokens` value from `100` to `500`. 
     """)
 
+comment = st.text_input("Enter your text for analysis")#User input
+
+st.text('')
+if st.button("Submit for Analysis"):#User Review Button
+	st.text("Positive")
+	
+st.text('')#This shows up the Review as positive,negative or neutral.
+
 if "api_key" not in st.session_state:
     st.session_state.api_key = ""
 
