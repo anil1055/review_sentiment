@@ -35,11 +35,10 @@ selected_formatted_name = st.sidebar.radio(
     list(formatted_names_to_identifiers.keys())
 )
 
-model: str = st.selectbox("Model", options=MODEL_MOVIES)
+model_name: str = st.selectbox("Model", options=MODEL_MOVIES)
+selected_model = MODEL_MOVIE[model_name]
 
 access_token = "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"
-
-selected_model = MODEL_MOVIE[selected_formatted_name]
 pipe = pipeline("text-classification", model=selected_model, token=access_token)
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
@@ -53,9 +52,6 @@ model_display_name = selected_formatted_name  # Already formatted
 # st.write(f"Model being used: `{model_display_name}`")
 
 st.sidebar.markdown('---')
-
-# Adjust the title based on the selected model
-st.header(f"`{model_display_name}` Model")
 
 with st.expander("About this app"):
     st.write(f"""
