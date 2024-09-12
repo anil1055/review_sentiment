@@ -26,12 +26,8 @@ formatted_names_to_identifiers = {
 }
 
 # Debug to ensure names are formatted correctly
-#st.write("Formatted Model Names to Identifiers:", formatted_names_to_identifiers)
+#st.write("Formatted Model Names to Identifiers:", formatted_names_to_identifiers
 
-selected_formatted_name = st.sidebar.radio(
-    "Select LLM Model for Turkish movie review analysis",
-    list(formatted_names_to_identifiers.keys())
-)
 
 model_name: str = st.selectbox("Model", options=MODEL_MOVIES)
 selected_model = MODEL_MOVIE[model_name]
