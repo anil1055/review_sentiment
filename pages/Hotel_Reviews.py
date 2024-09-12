@@ -4,14 +4,14 @@ import requests
 st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='📖')
 st.header("📖Hotel Review Analysis - TR")
 
-MODEL_MOVIE = {
+MODEL_HOTEL = {
     "albert": "anilguven/albert_tr_turkish_hotel_reviews",  # Add the emoji for the Meta-Llama model
     "distilbert": "anilguven/distilbert_tr_turkish_hotel_reviews",
     "bert": "anilguven/bert_tr_turkish_hotel_reviews",
     "electra": "anilguven/electra_tr_turkish_hotel_reviews",
 }
 
-MODEL_MOVIES = ["albert","distilbert","bert","electra"]
+MODEL_HOTELS = ["albert","distilbert","bert","electra"]
 
 # Use a pipeline as a high-level helper
 from transformers import pipeline
@@ -22,15 +22,15 @@ def format_model_name(model_key):
     return formatted_name
 
 formatted_names_to_identifiers = {
-    format_model_name(key): key for key in MODEL_MOVIE.keys()
+    format_model_name(key): key for key in MODEL_HOTEL.keys()
 }
 
 # Debug to ensure names are formatted correctly
 #st.write("Formatted Model Names to Identifiers:", formatted_names_to_identifiers
 
 
-model_name: str = st.selectbox("Model", options=MODEL_MOVIES)
-selected_model = MODEL_MOVIE[model_name]
+model_name: str = st.selectbox("Model", options=MODEL_HOTELS)
+selected_model = MODEL_HOTEL[model_name]
 
 access_token = "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"
 pipe = pipeline("text-classification", model=selected_model, token=access_token)
@@ -40,8 +40,8 @@ pipe = pipeline("text-classification", model=selected_model, token=access_token)
 #pipe = AutoModelForSequenceClassification.from_pretrained(pretrained_model_name_or_path=selected_model)
 
 # Display the selected model using the formatted name
-model_display_name = selected_formatted_name  # Already formatted
-# st.write(f"Model being used: `{model_display_name}`")
+model_display_name = selected_model  # Already formatted
+st.write(f"Model being used: `{model_display_name}`")
 
 st.sidebar.markdown('---')
 
