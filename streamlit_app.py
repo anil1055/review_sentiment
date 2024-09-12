@@ -10,8 +10,6 @@ MODEL_IMAGES = {
     "anilguven/bert_tr_turkish_movie_reviews": "https://em-content.zobj.net/source/twitter/376/tornado_1f32a-fe0f.png",
 }
 
-
-
 # Create a mapping from formatted model names to their original identifiers
 def format_model_name(model_key):
     parts = model_key.split('/')
@@ -25,9 +23,7 @@ formatted_names_to_identifiers = {
     format_model_name(key): key for key in MODEL_IMAGES.keys()
 }
 
-formatted_names_to_identifiers = {
-    format_model_name(key): key for key in MODEL_HOTELS.keys()
-}
+
 
 # Debug to ensure names are formatted correctly
 #st.write("Formatted Model Names to Identifiers:", formatted_names_to_identifiers)
@@ -37,10 +33,7 @@ selected_formatted_name = st.sidebar.radio(
     list(formatted_names_to_identifiers.keys())
 )
 
-selected_formatted_name = st.sidebar.radio(
-    "Select LLM Model for Turkish hotel review analysis",
-    list(formatted_names_to_identifiers.keys())
-)
+
 
 selected_model = formatted_names_to_identifiers[selected_formatted_name]
 
