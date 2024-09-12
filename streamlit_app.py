@@ -12,7 +12,7 @@ MODEL_MOVIE = {
 
 from simpletransformers.classification import ClassificationModel
 
-model_b = ClassificationModel("bert", "anilguven/bert_tr_turkish_movie_reviews")
+model_b = ClassificationModel("bert", "anilguven/bert_tr_turkish_movie_reviews", use_cuda=False)
 
 # Create a mapping from formatted model names to their original identifiers
 def format_model_name(model_key):
