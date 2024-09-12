@@ -23,7 +23,7 @@ def format_model_name(model_key):
     name_parts = parts[1]
 
     # General formatting for other models
-    formatted_name = ' '.join(name_parts).title()  # Join them into a single string with title case
+    formatted_name = ' '.join(name_parts)  # Join them into a single string with title case
     return formatted_name
 
 formatted_names_to_identifiers = {
