@@ -10,12 +10,7 @@ MODEL_IMAGES = {
     "anilguven/bert_tr_turkish_movie_reviews": "https://em-content.zobj.net/source/twitter/376/tornado_1f32a-fe0f.png",
 }
 
-MODEL_HOTELS = {
-    "anilguven/albert_tr_turkish_hotel_reviews": "https://em-content.zobj.net/source/twitter/376/llama_1f999.png",  # Add the emoji for the Meta-Llama model
-    "anilguven/distilbert_tr_turkish_hotel_reviews": "https://em-content.zobj.net/source/twitter/376/llama_1f999.png",
-    "anilguven/electra_tr_turkish_hotel_reviews": "https://em-content.zobj.net/source/twitter/376/tornado_1f32a-fe0f.png",
-    "anilguven/bert_tr_turkish_hotel_reviews": "https://em-content.zobj.net/source/twitter/376/tornado_1f32a-fe0f.png",
-}
+
 
 # Create a mapping from formatted model names to their original identifiers
 def format_model_name(model_key):
