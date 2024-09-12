@@ -1,7 +1,8 @@
 import streamlit as st
 import requests
 
-st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='AG')
+st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='📖')
+st.header("📖Review Analysis TR")
 
 MODEL_MOVIE = {
     "albert": "anilguven/albert_tr_turkish_movie_reviews",  # Add the emoji for the Meta-Llama model
@@ -9,6 +10,8 @@ MODEL_MOVIE = {
     "bert": "anilguven/bert_tr_turkish_movie_reviews",
     "electra": "anilguven/electra_tr_turkish_movie_reviews",
 }
+
+MODEL_MOVIES = ["albert","distilbert","bert","electra"]
 
 # Use a pipeline as a high-level helper
 from transformers import pipeline
@@ -31,6 +34,8 @@ selected_formatted_name = st.sidebar.radio(
     "Select LLM Model for Turkish movie review analysis",
     list(formatted_names_to_identifiers.keys())
 )
+
+model: str = st.selectbox("Model", options=MODEL_MOVIES)
 
 access_token = "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"
 
