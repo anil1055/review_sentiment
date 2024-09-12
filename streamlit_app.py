@@ -68,7 +68,7 @@ comment = st.text_input("Enter your text for analysis")#User input
 
 st.text('')
 if st.button("Submit for Analysis"):#User Review Button
-	resutl = pipe(comment)
+	result = pipe(comment)
 	label = result[0]
 	score = result[1]
 	if label == "LABEL_0": result = "Negative"
