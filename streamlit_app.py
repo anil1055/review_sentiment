@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='🦙')
+st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='AG')
 
 MODEL_MOVIE = {
     "albert": "anilguven/albert_tr_turkish_movie_reviews",  # Add the emoji for the Meta-Llama model
@@ -65,7 +65,6 @@ comment = st.text_input("Enter your text for analysis")#User input
 st.text('')
 if st.button("Submit for Analysis"):#User Review Button
 	result = pipe(comment)[0]
-	st.text(result)
 	label=''
 	if result["label"] == "LABEL_0": label = "Negative"
 	else: label = "Positive"
