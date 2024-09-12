@@ -2,13 +2,13 @@ import streamlit as st
 import requests
 
 st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='📖')
-st.header("📖Review Analysis TR")
+st.header("📖Hotel Review Analysis - TR")
 
 MODEL_MOVIE = {
-    "albert": "anilguven/albert_tr_turkish_movie_reviews",  # Add the emoji for the Meta-Llama model
-    "distilbert": "anilguven/distilbert_tr_turkish_movie_reviews",
-    "bert": "anilguven/bert_tr_turkish_movie_reviews",
-    "electra": "anilguven/electra_tr_turkish_movie_reviews",
+    "albert": "anilguven/albert_tr_turkish_hotel_reviews",  # Add the emoji for the Meta-Llama model
+    "distilbert": "anilguven/distilbert_tr_turkish_hotel_reviews",
+    "bert": "anilguven/bert_tr_turkish_hotel_reviews",
+    "electra": "anilguven/electra_tr_turkish_hotel_reviews",
 }
 
 MODEL_MOVIES = ["albert","distilbert","bert","electra"]
