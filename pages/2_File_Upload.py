@@ -11,7 +11,15 @@ MODEL_HOTEL = {
     "electra": "anilguven/electra_tr_turkish_hotel_reviews",
 }
 
-MODEL_HOTELS = ["albert","distilbert","bert","electra"]
+MODEL_MOVIE = {
+    "albert": "anilguven/albert_tr_turkish_movie_reviews",  # Add the emoji for the Meta-Llama model
+    "distilbert": "anilguven/distilbert_tr_turkish_movie_reviews",
+    "bert": "anilguven/bert_tr_turkish_movie_reviews",
+    "electra": "anilguven/electra_tr_turkish_movie_reviews",
+}
+
+MODELS = ["albert","distilbert","bert","electra"]
+MODEL_TASK = ["Movie review analysis","Hotel review analysis"]
 
 # Use a pipeline as a high-level helper
 from transformers import pipeline
@@ -37,8 +45,14 @@ uploaded_file = st.file_uploader(
 if not uploaded_file:
     st.stop()
 
-model_name: str = st.selectbox("Model", options=MODEL_HOTELS)
-selected_model = MODEL_HOTEL[model_name]
+task_name: str = st.selectbox("Task", options=MODEL_TASK)
+model_select = ''
+if task_name == "Movie review analysis": model_select = MODEL_MOVIE
+else: model_select = MODEL_HOTEL
+
+
+model_name: str = st.selectbox("Model", options=MODELS)
+selected_model = model_select[model_name]
 
 access_token = "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"
 pipe = pipeline("text-classification", model=selected_model, token=access_token)
@@ -64,7 +78,7 @@ with st.expander("About this app"):
 comment = st.text_input("Enter your text for analysis")#User input
 
 st.text('')
-if st.button("Submit for Analysis"):#User Review Button
+if st.button("Submit for File Analysis"):#User Review Button
 	result = pipe(comment)[0]
 	label=''
 	if result["label"] == "LABEL_0": label = "Negative"
