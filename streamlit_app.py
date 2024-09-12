@@ -69,11 +69,12 @@ comment = st.text_input("Enter your text for analysis")#User input
 st.text('')
 if st.button("Submit for Analysis"):#User Review Button
 	result = pipe(comment)
-	label = result[0]
-	score = result[1]
-	if label == "LABEL_0": result = "Negative"
-	else: label = "Positive"
-	st.text(label + "with " + str(score*100) + " accuracy")
+	#label = result[0]
+	#score = result[1]
+	#if label == "LABEL_0": result = "Negative"
+	#else: label = "Positive"
+	#st.text(label + "with " + str(score*100) + " accuracy")
+	st.text(result)
 
 
 if "api_key" not in st.session_state:
