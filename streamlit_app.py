@@ -38,10 +38,6 @@ pipe = pipeline("text-classification", model=selected_model, token=access_token)
 #tokenizer = AutoTokenizer.from_pretrained(selected_model)
 #pipe = AutoModelForSequenceClassification.from_pretrained(pretrained_model_name_or_path=selected_model)
 
-# Display the selected model using the formatted name
-model_display_name = selected_formatted_name  # Already formatted
-# st.write(f"Model being used: `{model_display_name}`")
-
 st.sidebar.markdown('---')
 
 with st.expander("About this app"):
