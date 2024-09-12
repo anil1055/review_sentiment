@@ -1,5 +1,4 @@
 import streamlit as st
-import openai
 import requests
 
 st.set_page_config(page_title="CodeLlama Playground - via DeepInfra", page_icon='🦙')
@@ -67,35 +66,11 @@ model_display_name = selected_formatted_name  # Already formatted
 st.sidebar.markdown('---')
 
 API_KEY = st.secrets["api_key"]
-
-openai.api_base = "https://api.deepinfra.com/v1/openai"
 MODEL_CODELLAMA = selected_model
 
-def get_response(api_key, model, user_input, max_tokens, top_p):
-    openai.api_key = api_key
+def get_response(model, user_input):
     try:
-        if "meta-llama/Meta-Llama-3-8B-Instruct" in model:
-            # Assume different API setup for Meta-Llama
-            chat_completion = requests.post(
-                "https://api.deepinfra.com/v1/openai/chat/completions",
-                headers={"Authorization": f"Bearer {api_key}"},
-                json={
-                    "model": model,
-                    "messages": [{"role": "user", "content": user_input}],
-                    "max_tokens": max_tokens,
-                    "top_p": top_p
-                }
-            ).json()
-            return chat_completion['choices'][0]['message']['content'], None
-        else:
-            # Existing setup for other models
-            chat_completion = openai.ChatCompletion.create(
-                model=model,
-                messages=[{"role": "user", "content": user_input}],
-                max_tokens=max_tokens,
-                top_p=top_p
-            )
-            return chat_completion.choices[0].message.content, None
+        print("X")
     except Exception as e:
         return None, str(e)
 
@@ -114,7 +89,6 @@ with st.expander("About this app"):
 
 if "api_key" not in st.session_state:
     st.session_state.api_key = ""
-
 
 # Clear chat history function and button
 def clear_chat_history():
