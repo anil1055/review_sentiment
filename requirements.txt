@@ -1,2 +1,2 @@
 streamlit
-simpletransformers
+simpletransformers==0.63.7
