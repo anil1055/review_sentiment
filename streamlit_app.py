@@ -35,7 +35,7 @@ selected_formatted_name = st.sidebar.radio(
 access_token = "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"
 
 selected_model = formatted_names_to_identifiers[selected_formatted_name]
-pipe = pipeline("text-classification", model=selected_model, token=access_token)
+pipe = pipeline("text-classification", model="anilguven/electra_tr_turkish_movie_reviews", token=access_token)
 
 #st.image(MODEL_IMAGES[selected_model], width=90)
 
