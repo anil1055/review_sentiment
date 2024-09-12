@@ -15,7 +15,6 @@ MODEL_MOVIES = ["albert","distilbert","bert","electra"]
 
 # Use a pipeline as a high-level helper
 from transformers import pipeline
-
 # Create a mapping from formatted model names to their original identifiers
 def format_model_name(model_key):
     name_parts = model_key
@@ -25,7 +24,6 @@ def format_model_name(model_key):
 formatted_names_to_identifiers = {
     format_model_name(key): key for key in MODEL_MOVIE.keys()
 }
-
 
 # Debug to ensure names are formatted correctly
 #st.write("Formatted Model Names to Identifiers:", formatted_names_to_identifiers)
@@ -40,12 +38,10 @@ selected_model = MODEL_MOVIE[model_name]
 
 access_token = "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"
 pipe = pipeline("text-classification", model=selected_model, token=access_token)
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
+#from transformers import AutoTokenizer, AutoModelForSequenceClassification
 #tokenizer = AutoTokenizer.from_pretrained(selected_model)
 #pipe = AutoModelForSequenceClassification.from_pretrained(pretrained_model_name_or_path=selected_model)
-
-#st.image(MODEL_IMAGES[selected_model], width=90)
 
 # Display the selected model using the formatted name
 model_display_name = selected_formatted_name  # Already formatted
