@@ -32,9 +32,10 @@ selected_formatted_name = st.sidebar.radio(
     list(formatted_names_to_identifiers.keys())
 )
 
+access_token = "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"
 
 selected_model = formatted_names_to_identifiers[selected_formatted_name]
-pipe = pipeline("text-classification", model=selected_model)
+pipe = pipeline("text-classification", model=selected_model, token=access_token)
 
 #st.image(MODEL_IMAGES[selected_model], width=90)
 
