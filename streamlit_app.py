@@ -10,9 +10,9 @@ MODEL_MOVIE = {
     "bert": "anilguven/bert_tr_turkish_movie_reviews",
 }
 
-from simpletransformers.classification import ClassificationModel
-
-model_b = ClassificationModel("bert", "anilguven/bert_tr_turkish_movie_reviews", use_cuda=False)
+# Use a pipeline as a high-level helper
+from transformers import pipeline
+pipe = pipeline("text-classification", model="anilguven/bert_tr_turkish_movie_reviews")
 
 # Create a mapping from formatted model names to their original identifiers
 def format_model_name(model_key):
@@ -69,7 +69,7 @@ comment = st.text_input("Enter your text for analysis")#User input
 
 st.text('')
 if st.button("Submit for Analysis"):#User Review Button
-	result = model_b.predict([comment])
+	result = pipe(comment)
 	st.text(result)
 
 
