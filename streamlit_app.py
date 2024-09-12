@@ -12,7 +12,6 @@ MODEL_MOVIE = {
 
 # Use a pipeline as a high-level helper
 from transformers import pipeline
-pipe = pipeline("text-classification", model="anilguven/bert_tr_turkish_movie_reviews")
 
 # Create a mapping from formatted model names to their original identifiers
 def format_model_name(model_key):
@@ -35,6 +34,7 @@ selected_formatted_name = st.sidebar.radio(
 
 
 selected_model = formatted_names_to_identifiers[selected_formatted_name]
+pipe = pipeline("text-classification", model=selected_model)
 
 #st.image(MODEL_IMAGES[selected_model], width=90)
 
