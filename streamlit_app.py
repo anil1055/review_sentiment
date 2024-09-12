@@ -34,7 +34,6 @@ selected_formatted_name = st.sidebar.radio(
 )
 
 
-
 selected_model = formatted_names_to_identifiers[selected_formatted_name]
 
 #st.image(MODEL_IMAGES[selected_model], width=90)
@@ -69,8 +68,10 @@ comment = st.text_input("Enter your text for analysis")#User input
 
 st.text('')
 if st.button("Submit for Analysis"):#User Review Button
-	result = pipe(comment)
-	st.text(result)
+	result, score = pipe(comment)
+	if result == "LABEL_0": result = "Negative"
+	else: result = "Positive"
+	st.text(result + "with " + str(score*100) + " accuracy")
 
 
 if "api_key" not in st.session_state:
