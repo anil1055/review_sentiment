@@ -6,8 +6,8 @@ st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='ðŸ¦
 MODEL_MOVIE = {
     "albert": "anilguven/albert_tr_turkish_movie_reviews",  # Add the emoji for the Meta-Llama model
     "distilbert": "anilguven/distilbert_tr_turkish_movie_reviews",
-    "electra": "anilguven/electra_tr_turkish_movie_reviews",
     "bert": "anilguven/bert_tr_turkish_movie_reviews",
+    "electra": "anilguven/electra_tr_turkish_movie_reviews",
 }
 
 # Use a pipeline as a high-level helper
@@ -49,15 +49,6 @@ model_display_name = selected_formatted_name  # Already formatted
 
 st.sidebar.markdown('---')
 
-MODEL_CODELLAMA = selected_model
-
-def get_response(model, user_input):
-    try:
-        print("X")
-    except Exception as e:
-        return None, str(e)
-
-
 # Adjust the title based on the selected model
 st.header(f"`{model_display_name}` Model")
 
@@ -81,10 +72,3 @@ if st.button("Submit for Analysis"):#User Review Button
 	st.text(label + " comment with " + str(result["score"]) + " accuracy result")
 
 
-if "api_key" not in st.session_state:
-    st.session_state.api_key = ""
-
-# Clear chat history function and button
-def clear_chat_history():
-    st.session_state.messages = [{"role": "assistant", "content": "How may I assist you today?"}]
-st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
