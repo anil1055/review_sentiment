@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-st.set_page_config(page_title="CodeLlama Playground - via DeepInfra", page_icon='🦙')
+st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='🦙')
 
 MODEL_IMAGES = {
     "anilguven/albert_tr_turkish_movie_reviews": "https://em-content.zobj.net/source/twitter/376/llama_1f999.png",  # Add the emoji for the Meta-Llama model
@@ -20,16 +20,11 @@ MODEL_HOTELS = {
 # Create a mapping from formatted model names to their original identifiers
 def format_model_name(model_key):
     parts = model_key.split('/')
-    model_name = parts[-1]  # Get the last part after '/'
-    name_parts = model_name.split('-')
+    name_parts = parts[1]
 
-    # Custom formatting for specific models
-    if "Meta-Llama-3-8B-Instruct" in model_key:
-        return "Llama 3 8B-Instruct"
-    else:
-        # General formatting for other models
-        formatted_name = ' '.join(name_parts[:-2]).title()  # Join them into a single string with title case
-        return formatted_name
+    # General formatting for other models
+    formatted_name = ' '.join(name_parts).title()  # Join them into a single string with title case
+    return formatted_name
 
 formatted_names_to_identifiers = {
     format_model_name(key): key for key in MODEL_IMAGES.keys()
