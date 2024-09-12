@@ -39,7 +39,7 @@ selected_model = MODEL_MOVIE[selected_formatted_name]
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 tokenizer = AutoTokenizer.from_pretrained(selected_model)
-pipe = AutoModelForSequenceClassification.from_pretrained(model=selected_model)
+pipe = AutoModelForSequenceClassification.from_pretrained(pretrained_model_name_or_path=selected_model)
 
 #st.image(MODEL_IMAGES[selected_model], width=90)
 
