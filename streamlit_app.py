@@ -48,7 +48,6 @@ model_display_name = selected_formatted_name  # Already formatted
 
 st.sidebar.markdown('---')
 
-API_KEY = st.secrets["api_key"]
 MODEL_CODELLAMA = selected_model
 
 def get_response(model, user_input):
@@ -56,7 +55,6 @@ def get_response(model, user_input):
         print("X")
     except Exception as e:
         return None, str(e)
-
 
 
 # Adjust the title based on the selected model
