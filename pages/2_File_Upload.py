@@ -1,5 +1,5 @@
 import streamlit as st
-import requests
+import pandas as pd
 
 st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='📖')
 st.header("📖Hotel Review Analysis - TR")
@@ -55,10 +55,17 @@ uploaded_file = st.file_uploader(
 if not uploaded_file:
     st.stop()
 
+
+@st.cache_data
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv().encode("utf-8")
+
 datas = [] 
 try:
     if uploaded_file.name.lower().endswith(".csv"):
-        file = uploaded_file
+        text = uploaded_file.read().decode("utf-8", errors="replace")
+        datas = text.split("\n")
     elif uploaded_file.name.lower().endswith(".txt"):
         text = uploaded_file.read().decode("utf-8", errors="replace")
         datas = text.split("\n")
@@ -93,6 +100,8 @@ st.sidebar.markdown('---')
 
 results=[]
 txt = ''
+labels=[]
+accuracies=[]
 if st.button("Submit for File Analysis"):#User Review Button
     label=''
     for data in datas:
@@ -100,12 +109,30 @@ if st.button("Submit for File Analysis"):#User Review Button
         if result["label"] == "LABEL_0": label = "Negative"
         else: label = "Positive"
         results.append(data[:-1] + ", " + label + ", " + str(result["score"]*100) + "\n")
+        labels.append(label)
+        accuracies.append(str(result["score"]*100))
         txt += data[:-1] + ", " + label + ", " + str(result["score"]*100) + "\n"
     
     st.text("All files evaluated. You'll download result file.")
     with st.expander("Show Results"):
         st.write(results)
     st.download_button('Download Result File', txt)
+
+    dataframe = pd.DataFrame(
+        {
+            "text": datas,
+            "label": labels,
+            "accuracy": accuracies,
+    }
+    )
+    csv = convert_df(dataframe)
+
+    st.download_button(
+        label="Download as CSV",
+        data=csv,
+        file_name="large_df.csv",
+        mime="text/csv",
+    )
 
  #   with open(result_file) as f:
  #       st.download_button('Download Txt file', f)
