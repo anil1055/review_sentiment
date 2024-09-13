@@ -1,10 +1,8 @@
 import streamlit as st
-import requests
-
-st.title("Movie Reviews")
 
 st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='📖')
 st.header("📖Movie Review Analysis - TR")
+st.title("Movie Reviews")
 
 MODEL_MOVIE = {
     "albert": "anilguven/albert_tr_turkish_movie_reviews",  # Add the emoji for the Meta-Llama model
