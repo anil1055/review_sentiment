@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='📖')
-st.header("📖Hotel Review Analysis - TR")
+st.header("📖Review Analysis for Your File - TR")
 
 MODEL_HOTEL = {
     "albert": "anilguven/albert_tr_turkish_hotel_reviews",  # Add the emoji for the Meta-Llama model
@@ -114,25 +114,29 @@ if st.button("Submit for File Analysis"):#User Review Button
         txt += data[:-1] + ", " + label + ", " + str(result["score"]*100) + "\n"
     
     st.text("All files evaluated. You'll download result file.")
-    with st.expander("Show Results"):
-        st.write(results)
-    st.download_button('Download Result File', txt)
+    if uploaded_file.name.lower().endswith(".txt"):
+        with st.expander("Show Results"):
+            st.write(results)
+        st.download_button('Download Result File', txt)
 
-    dataframe = pd.DataFrame(
-        {
-            "text": datas,
-            "label": labels,
-            "accuracy": accuracies,
-    }
-    )
-    csv = convert_df(dataframe)
+    elif uploaded_file.name.lower().endswith(".csv"):
+        dataframe = pd.DataFrame(
+            {
+                "text": datas,
+                "label": labels,
+                "accuracy": accuracies,
+        }
+        )
+        csv = convert_df(dataframe)
 
-    st.download_button(
-        label="Download as CSV",
-        data=csv,
-        file_name="large_df.csv",
-        mime="text/csv",
-    )
+        st.download_button(
+            label="Download as CSV",
+            data=csv,
+            file_name="large_df.csv",
+            mime="text/csv",
+        )
+    else:
+        raise NotImplementedError(f"File type not supported")
 
  #   with open(result_file) as f:
  #       st.download_button('Download Txt file', f)
