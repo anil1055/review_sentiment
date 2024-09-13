@@ -47,8 +47,6 @@ pipe = pipeline("text-classification", model=selected_model, token=access_token)
 model_display_name = selected_model  # Already formatted
 st.write(f"Model being used: `{model_display_name}`")
 
-st.sidebar.markdown('---')
-
 with st.expander("About this app"):
     st.write(f"""
     This Chatbot app allows users to interact with various models including the new LLM models hosted on DeepInfra's OpenAI compatible API.

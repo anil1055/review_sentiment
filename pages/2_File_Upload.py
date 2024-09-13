@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-
 st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='📖')
 st.header("📖Review Analysis for Your File - TR")
 
@@ -103,8 +102,6 @@ pipe = pipeline("text-classification", model=selected_model, token=access_token)
 # Display the selected model using the formatted name
 model_display_name = selected_model  # Already formatted
 st.write(f"Model being used: `{model_display_name}`")
-
-st.sidebar.markdown('---')
 
 results=[]
 txt = ''
