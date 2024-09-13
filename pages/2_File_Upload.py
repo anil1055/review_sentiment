@@ -103,13 +103,9 @@ if st.button("Submit for File Analysis"):#User Review Button
     
     st.text("All files evaluated. You'll download result file.")
     
-    result_file = open(uploaded_file.name.lower() + " _result.txt", "w")
-    result_file.writelines(results)
-
     st.write(results)
-    st.download_button('Download Result File', result_file)
+    st.download_button('Download Result File', results)
 
-    result_file.close()
  #   with open(result_file) as f:
  #       st.download_button('Download Txt file', f)
 
