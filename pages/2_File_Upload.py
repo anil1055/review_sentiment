@@ -44,6 +44,18 @@ uploaded_file = st.file_uploader(
 
 if not uploaded_file:
     st.stop()
+    
+try:
+    if uploaded_file.name.lower().endswith(".csv"):
+        return uploaded_file
+    elif uploaded_file.name.lower().endswith(".txt"):
+        return uploaded_file
+    else:
+        raise NotImplementedError(f"File type {file.name.split('.')[-1]} not supported")
+except Exception as e:
+    st.error("Error reading file. Make sure the file is not corrupted or encrypted")
+    logger.error(f"{e.__class__.__name__}: {e}. Extension: {uploaded_file.name.split('.')[-1]}")
+    st.stop()
 
 task_name: str = st.selectbox("Task", options=MODEL_TASK)
 model_select = ''
