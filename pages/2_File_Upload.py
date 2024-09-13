@@ -104,6 +104,7 @@ results=[]
 txt = ''
 labels=[]
 accuracies=[]
+values=[]
 if st.button("Submit for File Analysis"):#User Review Button
     label=''
     for data in datas:
@@ -113,6 +114,7 @@ if st.button("Submit for File Analysis"):#User Review Button
         results.append(data[:-1] + ", " + label + ", " + str(result["score"]*100) + "\n")
         labels.append(label)
         accuracies.append(str(result["score"]*100))
+        values.append(data[:-1])
         txt += data[:-1] + ", " + label + ", " + str(result["score"]*100) + "\n"
     
     st.text("All files evaluated. You'll download result file.")
@@ -124,7 +126,7 @@ if st.button("Submit for File Analysis"):#User Review Button
     elif uploaded_file.name.lower().endswith(".csv"):
         dataframe = pd.DataFrame(
             {
-                "text": datas,
+                "text": values,
                 "label": labels,
                 "accuracy": accuracies,
         }
