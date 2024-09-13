@@ -108,7 +108,8 @@ if st.button("Submit for File Analysis"):#User Review Button
     result_file.close()
 
     st.write(results)
-    with open(result_file) as f:
-        st.download_button('Download Txt file', f)
+    st.download_button('Download Result File', result_file)
+ #   with open(result_file) as f:
+ #       st.download_button('Download Txt file', f)
 
 
