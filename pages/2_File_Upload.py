@@ -121,19 +121,14 @@ if st.button("Submit for File Analysis"):#User Review Button
     if uploaded_file.name.lower().endswith(".txt"):
         with st.expander("Show Results"):
             st.write(results)
-        st.download_button('Download Result File', txt, uploaded_file.name.lower() + "_results.txt")
+        st.download_button('Download Result File', txt, uploaded_file.name.lower()[:-4] + "_results.txt")
 
     elif uploaded_file.name.lower().endswith(".csv"):
-        dataframe = pd.DataFrame(
-            {
-                "text": values,
-                "label": labels,
-                "accuracy": accuracies,
-        }
-        )
+        dataframe = pd.DataFrame({ "text": values,"label": labels,"accuracy": accuracies})
+        with st.expander("Show Results"):
+            st.write(dataframe)
         csv = convert_df(dataframe)
-
-        st.download_button(label="Download as CSV",data=csv,file_name=uploaded_file.name.lower() + "_results.csv",mime="text/csv")
+        st.download_button(label="Download as CSV",data=csv,file_name=uploaded_file.name.lower()[:-4] + "_results.csv",mime="text/csv")
     else:
         raise NotImplementedError(f"File type not supported")
 
