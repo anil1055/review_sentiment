@@ -51,7 +51,7 @@ try:
         file = uploaded_file
     elif uploaded_file.name.lower().endswith(".txt"):
         file = open(uploaded_file, "r")
-        datas = [data for d in file.readlines()]
+        datas = [d for d in file.readlines()]
         file.close()
     else:
         raise NotImplementedError(f"File type {file.name.split('.')[-1]} not supported")
