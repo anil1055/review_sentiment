@@ -47,9 +47,9 @@ if not uploaded_file:
     
 try:
     if uploaded_file.name.lower().endswith(".csv"):
-        return uploaded_file
+        file = uploaded_file
     elif uploaded_file.name.lower().endswith(".txt"):
-        return uploaded_file
+        file = uploaded_file
     else:
         raise NotImplementedError(f"File type {file.name.split('.')[-1]} not supported")
 except Exception as e:
