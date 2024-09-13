@@ -96,14 +96,14 @@ comment = st.text_input("Enter your text for analysis")#User input
 st.text('')
 results=[]
 if st.button("Submit for File Analysis"):#User Review Button
-	label=''   
+    label=''
     for data in datas:
-        result = pipe(data)[0]       
+        result = pipe(data)[0]
         if result["label"] == "LABEL_0": label = "Negative"
         else: label = "Positive"
-        results.append(data + ", " + label + ", " + str(result["score"]*100) + "\n") 
+        results.append(data + ", " + label + ", " + str(result["score"]*100) + "\n")
     
-    st.text(All files evaluated. You'll download result file.)
+    st.text("All files evaluated. You'll download result file.")
     
     result_file = open(uploaded_file.name.lower() + " _result.txt", "w")
     result_file.writelines(L)
