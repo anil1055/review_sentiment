@@ -57,13 +57,13 @@ if not uploaded_file:
 
 datas = [] 
 try:
-    st.text(uploaded_file.name.lower())
     if uploaded_file.name.lower().endswith(".csv"):
         file = uploaded_file
     elif uploaded_file.name.lower().endswith(".txt"):
         text = uploaded_file.read().decode("utf-8", errors="replace")
         datas = text.split("\n")
-        st.text(datas)
+        with st.expander("Show Results"):
+            st.text(datas)
     else:
         raise NotImplementedError(f"File type {uploaded_file.name.split('.')[-1]} not supported")
 except Exception as e:
