@@ -51,9 +51,7 @@ try:
     if uploaded_file.name.lower().endswith(".csv"):
         file = uploaded_file
     elif uploaded_file.name.lower().endswith(".txt"):
-        file = open(uploaded_file, "r", encoding="UTF-8")
-        datas = [d for d in file.readlines()]
-        file.close()
+        datas = [line for line in uploaded_file]
         st.text(datas)
     else:
         raise NotImplementedError(f"File type {uploaded_file.name.split('.')[-1]} not supported")
