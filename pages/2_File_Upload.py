@@ -44,12 +44,16 @@ uploaded_file = st.file_uploader(
 
 if not uploaded_file:
     st.stop()
-    
+
+datas = [] 
 try:
     if uploaded_file.name.lower().endswith(".csv"):
         file = uploaded_file
     elif uploaded_file.name.lower().endswith(".txt"):
-        file = uploaded_file
+        file = open(uploaded_file, "r")
+        content=file.readlines()
+        datas = [data for d in content]
+        file.close()
     else:
         raise NotImplementedError(f"File type {file.name.split('.')[-1]} not supported")
 except Exception as e:
@@ -90,11 +94,23 @@ with st.expander("About this app"):
 comment = st.text_input("Enter your text for analysis")#User input
 
 st.text('')
+
 if st.button("Submit for File Analysis"):#User Review Button
-	result = pipe(comment)[0]
 	label=''
-	if result["label"] == "LABEL_0": label = "Negative"
-	else: label = "Positive"
-	st.text(label + " comment with " + str(result["score"]) + " accuracy result")
+    results = []
+    for data in datas:
+        result = pipe(data)[0]       
+        if result["label"] == "LABEL_0": label = "Negative"
+        else: label = "Positive"
+        results.append(data + ", " + label + ", " + str(result["score"]*100) + "\n") 
+    
+    st.text(All files evaluated. You'll download result file.)
+    
+    result_file = open(uploaded_file.name.lower() + " _result.txt", "w")
+    result_file.writelines(L)
+    result_file.close()
+    
+    with open(result_file) as f:
+        st.download_button('Download Txt file', f)
 
 
