@@ -51,7 +51,7 @@ try:
     if uploaded_file.name.lower().endswith(".csv"):
         file = uploaded_file
     elif uploaded_file.name.lower().endswith(".txt"):
-        datas = [line for line in uploaded_file]
+        datas = [line.encode('utf-8') for line in uploaded_file]
         st.text(datas)
     else:
         raise NotImplementedError(f"File type {uploaded_file.name.split('.')[-1]} not supported")
@@ -103,7 +103,7 @@ if st.button("Submit for File Analysis"):#User Review Button
     st.text("All files evaluated. You'll download result file.")
     
     result_file = open(uploaded_file.name.lower() + " _result.txt", "w")
-    result_file.writelines(L)
+    result_file.writelines(results)
     result_file.close()
     
     with open(result_file) as f:
