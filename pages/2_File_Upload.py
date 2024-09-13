@@ -94,10 +94,9 @@ with st.expander("About this app"):
 comment = st.text_input("Enter your text for analysis")#User input
 
 st.text('')
-
+results=[]
 if st.button("Submit for File Analysis"):#User Review Button
-	label=''
-    results = []
+	label=''   
     for data in datas:
         result = pipe(data)[0]       
         if result["label"] == "LABEL_0": label = "Negative"
