@@ -51,7 +51,7 @@ try:
     if uploaded_file.name.lower().endswith(".csv"):
         file = uploaded_file
     elif uploaded_file.name.lower().endswith(".txt"):
-        datas = [line.encode('utf-8') for line in uploaded_file]
+        datas = [str(line).encode('utf-8') for line in uploaded_file]
         st.text(datas)
     else:
         raise NotImplementedError(f"File type {uploaded_file.name.split('.')[-1]} not supported")
