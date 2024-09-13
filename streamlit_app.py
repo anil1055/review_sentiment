@@ -42,7 +42,6 @@ pipe = pipeline("text-classification", model=selected_model, token=access_token)
 #tokenizer = AutoTokenizer.from_pretrained(selected_model)
 #pipe = AutoModelForSequenceClassification.from_pretrained(pretrained_model_name_or_path=selected_model)
 
-st.sidebar.markdown('---')
 
 with st.expander("About this app"):
     st.write(f"""
