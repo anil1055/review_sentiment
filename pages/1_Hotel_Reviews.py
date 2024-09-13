@@ -1,6 +1,5 @@
 import streamlit as st
 
-st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='📖')
 st.header("📖Hotel Review Analysis - TR")
 
 with st.sidebar:
