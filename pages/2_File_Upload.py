@@ -36,16 +36,6 @@ formatted_names_to_identifiers = {
 # Debug to ensure names are formatted correctly
 #st.write("Formatted Model Names to Identifiers:", formatted_names_to_identifiers
 
-with st.expander("About this app"):
-    st.write(f"""
-    This Chatbot app allows users to interact with various models including the new LLM models hosted on DeepInfra's OpenAI compatible API.
-    For more info, you can refer to [DeepInfra's documentation](https://deepinfra.com/docs/advanced/openai_api).
-
-    💡 For decent answers, you'd want to increase the `Max Tokens` value from `100` to `500`. 
-    """)
-
-st.text('')
-
 uploaded_file = st.file_uploader(
     "Upload a csv or txt file",
     type=["csv", "txt"],
@@ -57,13 +47,13 @@ if not uploaded_file:
 
 datas = [] 
 try:
+    st.text(uploaded_file.name.lower())
     if uploaded_file.name.lower().endswith(".csv"):
         file = uploaded_file
     elif uploaded_file.name.lower().endswith(".txt"):
         text = uploaded_file.read().decode("utf-8", errors="replace")
         datas = text.split("\n")
-        with st.expander("Show Datas"):
-            st.text(datas)
+        st.text(datas)
     else:
         raise NotImplementedError(f"File type {uploaded_file.name.split('.')[-1]} not supported")
 except Exception as e:
@@ -91,6 +81,15 @@ st.write(f"Model being used: `{model_display_name}`")
 
 st.sidebar.markdown('---')
 
+with st.expander("About this app"):
+    st.write(f"""
+    This Chatbot app allows users to interact with various models including the new LLM models hosted on DeepInfra's OpenAI compatible API.
+    For more info, you can refer to [DeepInfra's documentation](https://deepinfra.com/docs/advanced/openai_api).
+
+    💡 For decent answers, you'd want to increase the `Max Tokens` value from `100` to `500`. 
+    """)
+
+st.text('')
 results=[]
 txt = ''
 if st.button("Submit for File Analysis"):#User Review Button
