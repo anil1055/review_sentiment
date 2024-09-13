@@ -51,21 +51,18 @@ try:
         file = uploaded_file
     elif uploaded_file.name.lower().endswith(".txt"):
         file = open(uploaded_file, "r")
-        content=file.readlines()
-        datas = [data for d in content]
+        datas = [data for d in file.readlines()]
         file.close()
     else:
         raise NotImplementedError(f"File type {file.name.split('.')[-1]} not supported")
 except Exception as e:
     st.error("Error reading file. Make sure the file is not corrupted or encrypted")
-    logger.error(f"{e.__class__.__name__}: {e}. Extension: {uploaded_file.name.split('.')[-1]}")
     st.stop()
 
 task_name: str = st.selectbox("Task", options=MODEL_TASK)
 model_select = ''
 if task_name == "Movie review analysis": model_select = MODEL_MOVIE
 else: model_select = MODEL_HOTEL
-
 
 model_name: str = st.selectbox("Model", options=MODELS)
 selected_model = model_select[model_name]
