@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 
+st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='📖')
 st.header("📖Review Analysis for Your File - TR")
 
 with st.sidebar:
