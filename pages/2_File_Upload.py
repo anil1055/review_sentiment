@@ -52,8 +52,8 @@ try:
         file = uploaded_file
     elif uploaded_file.name.lower().endswith(".txt"):
         text = uploaded_file.read().decode("utf-8", errors="replace")
-        datas = [line for line in uploaded_file]
-        st.text(text)
+        datas = text.split("\n")
+        st.text(datas)
     else:
         raise NotImplementedError(f"File type {uploaded_file.name.split('.')[-1]} not supported")
 except Exception as e:
