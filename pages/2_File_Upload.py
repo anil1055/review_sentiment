@@ -47,14 +47,16 @@ if not uploaded_file:
 
 datas = [] 
 try:
+    st.text(uploaded_file.name.lower())
     if uploaded_file.name.lower().endswith(".csv"):
         file = uploaded_file
     elif uploaded_file.name.lower().endswith(".txt"):
-        file = open(uploaded_file, "r")
+        file = open(uploaded_file, "r", encoding="UTF-8")
         datas = [d for d in file.readlines()]
         file.close()
+        st.text(datas)
     else:
-        raise NotImplementedError(f"File type {file.name.split('.')[-1]} not supported")
+        raise NotImplementedError(f"File type {uploaded_file.name.split('.')[-1]} not supported")
 except Exception as e:
     st.error("Error reading file. Make sure the file is not corrupted or encrypted")
     st.stop()
