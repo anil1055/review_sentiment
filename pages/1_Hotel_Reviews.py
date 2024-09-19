@@ -1,11 +1,12 @@
 import streamlit as st
 
-
+st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='📖')
+st.header("📖Hotel Review Analysis - TR")
 
 with st.sidebar:
-    st.page_link('streamlit_app.py', label='Movie Reviews', icon='🔥')
-    st.page_link('pages/1_Hotel_Reviews.py', label='Hotel Reviews', icon='🔥')
-    st.page_link('pages/2_File_Upload.py', label='File Upload', icon='🔥')
+    st.write('Movie Reviews')
+    st.write('Hotel Reviews')
+    st.write('File Upload')
 
 MODEL_HOTEL = {
     "albert": "anilguven/albert_tr_turkish_hotel_reviews",  # Add the emoji for the Meta-Llama model
