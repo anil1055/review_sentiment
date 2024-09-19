@@ -4,7 +4,9 @@ st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='�
 st.header("📖Movie Review Analysis - TR")
 
 with st.sidebar:
-    st.write("")
+    st.page_link('streamlit_app.py', label='Movie Reviews', icon='🔥')
+    st.page_link('pages/1_Hotel_Reviews.py', label='Hotel Reviews', icon='🔥')
+    st.page_link('pages/2_File_Upload.py', label='File Upload', icon='🔥')
 
 MODEL_MOVIE = {
     "albert": "anilguven/albert_tr_turkish_movie_reviews",  # Add the emoji for the Meta-Llama model
