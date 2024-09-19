@@ -4,9 +4,7 @@ st.set_page_config(page_title="Turkish Review Analysis - via AG", page_icon='ðŸ“
 st.header("ðŸ“–Movie Review Analysis - TR")
 
 with st.sidebar:
-    st.write('Movie Reviews')
-    st.write('Hotel Reviews')
-    st.write('File Upload')
+    st.write("")
 
 MODEL_MOVIE = {
     "albert": "anilguven/albert_tr_turkish_movie_reviews",  # Add the emoji for the Meta-Llama model
