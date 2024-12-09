@@ -8,6 +8,7 @@ with st.sidebar:
     st.page_link('streamlit_app.py', label='Movie Reviews', icon='🔥')
     st.page_link('pages/1_Hotel_Reviews.py', label='Hotel Reviews', icon='🔥')
     st.page_link('pages/2_File_Upload.py', label='File Upload', icon='🔥')
+    hf_key = st.text_input("HuggingFace Access Key", key="hf_key", type="password")
 
 MODEL_HOTEL = {
     "albert": "anilguven/albert_tr_turkish_hotel_reviews",  # Add the emoji for the Meta-Llama model
@@ -92,7 +93,11 @@ else: model_select = MODEL_HOTEL
 model_name: str = st.selectbox("Model", options=MODELS)
 selected_model = model_select[model_name]
 
-access_token = "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"
+if not hf_key:
+    st.info("Please add your HuggingFace Access Key to continue.")
+    st.stop()
+
+access_token = hf_key
 pipe = pipeline("text-classification", model=selected_model, token=access_token)
 
 #from transformers import AutoTokenizer, AutoModelForSequenceClassification
@@ -109,31 +114,35 @@ labels=[]
 accuracies=[]
 values=[]
 if st.button("Submit for File Analysis"):#User Review Button
-    label=''
-    for data in datas:
-        result = pipe(data)[0]
-        if result["label"] == "LABEL_0": label = "Negative"
-        else: label = "Positive"
-        results.append(data[:-1] + ", " + label + ", " + str(result["score"]*100) + "\n")
-        labels.append(label)
-        accuracies.append(str(result["score"]*100))
-        values.append(data[:-1])
-        txt += data[:-1] + ", " + label + ", " + str(result["score"]*100) + "\n"
-    
-    st.text("All files evaluated. You'll download result file.")
-    if uploaded_file.name.lower().endswith(".txt"):
-        with st.expander("Show Results"):
-            st.write(results)
-        st.download_button('Download Result File', txt, uploaded_file.name.lower()[:-4] + "_results.txt")
+    if not hf_key:
+        st.info("Please add your HuggingFace Access Key to continue.")
+        st.stop()
+    else:    
+        label=''
+        for data in datas:
+            result = pipe(data)[0]
+            if result["label"] == "LABEL_0": label = "Negative"
+            else: label = "Positive"
+            results.append(data[:-1] + ", " + label + ", " + str(result["score"]*100) + "\n")
+            labels.append(label)
+            accuracies.append(str(result["score"]*100))
+            values.append(data[:-1])
+            txt += data[:-1] + ", " + label + ", " + str(result["score"]*100) + "\n"
+        
+        st.text("All files evaluated. You'll download result file.")
+        if uploaded_file.name.lower().endswith(".txt"):
+            with st.expander("Show Results"):
+                st.write(results)
+            st.download_button('Download Result File', txt, uploaded_file.name.lower()[:-4] + "_results.txt")
 
-    elif uploaded_file.name.lower().endswith(".csv"):
-        dataframe = pd.DataFrame({ "text": values,"label": labels,"accuracy": accuracies})
-        with st.expander("Show Results"):
-            st.write(dataframe)
-        csv = convert_df(dataframe)
-        st.download_button(label="Download as CSV",data=csv,file_name=uploaded_file.name.lower()[:-4] + "_results.csv",mime="text/csv")
-    else:
-        raise NotImplementedError(f"File type not supported")
+        elif uploaded_file.name.lower().endswith(".csv"):
+            dataframe = pd.DataFrame({ "text": values,"label": labels,"accuracy": accuracies})
+            with st.expander("Show Results"):
+                st.write(dataframe)
+            csv = convert_df(dataframe)
+            st.download_button(label="Download as CSV",data=csv,file_name=uploaded_file.name.lower()[:-4] + "_results.csv",mime="text/csv")
+        else:
+            raise NotImplementedError(f"File type not supported")
 
  #   with open(result_file) as f:
  #       st.download_button('Download Txt file', f)

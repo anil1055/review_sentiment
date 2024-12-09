@@ -60,10 +60,14 @@ comment = st.text_input("Enter your text for analysis")#User input
 
 st.text('')
 if st.button("Submit for Analysis"):#User Review Button
-	result = pipe(comment)[0]
-	label=''
-	if result["label"] == "LABEL_0": label = "Negative"
-	else: label = "Positive"
-	st.text(label + " comment with " + str(result["score"]) + " accuracy result")
+    if not hf_key:
+        st.info("Please add your HuggingFace Access Key to continue.")
+        st.stop()
+    else:
+        result = pipe(comment)[0]
+        label=''
+        if result["label"] == "LABEL_0": label = "Negative"
+        else: label = "Positive"
+        st.text(label + " comment with " + str(result["score"]) + " accuracy")
 
 

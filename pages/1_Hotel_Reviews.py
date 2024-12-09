@@ -7,6 +7,7 @@ with st.sidebar:
     st.page_link('streamlit_app.py', label='Movie Reviews', icon='🔥')
     st.page_link('pages/1_Hotel_Reviews.py', label='Hotel Reviews', icon='🔥')
     st.page_link('pages/2_File_Upload.py', label='File Upload', icon='🔥')
+    hf_key = st.text_input("HuggingFace Access Key", key="hf_key", type="password")
 
 MODEL_HOTEL = {
     "albert": "anilguven/albert_tr_turkish_hotel_reviews",  # Add the emoji for the Meta-Llama model
@@ -36,7 +37,11 @@ formatted_names_to_identifiers = {
 model_name: str = st.selectbox("Model", options=MODEL_HOTELS)
 selected_model = MODEL_HOTEL[model_name]
 
-access_token = "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"
+if not hf_key:
+    st.info("Please add your HuggingFace Access Key to continue.")
+    st.stop()
+
+access_token = hf_key
 pipe = pipeline("text-classification", model=selected_model, token=access_token)
 
 #from transformers import AutoTokenizer, AutoModelForSequenceClassification
@@ -59,10 +64,14 @@ comment = st.text_input("Enter your text for analysis")#User input
 
 st.text('')
 if st.button("Submit for Analysis"):#User Review Button
-	result = pipe(comment)[0]
-	label=''
-	if result["label"] == "LABEL_0": label = "Negative"
-	else: label = "Positive"
-	st.text(label + " comment with " + str(result["score"]) + " accuracy result")
+    if not hf_key:
+        st.info("Please add your HuggingFace Access Key to continue.")
+        st.stop()
+    else:
+        result = pipe(comment)[0]
+        label=''
+        if result["label"] == "LABEL_0": label = "Negative"
+        else: label = "Positive"
+        st.text(label + " comment with " + str(result["score"]) + " accuracy")
 
 
