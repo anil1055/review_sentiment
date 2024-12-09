@@ -41,10 +41,11 @@ formatted_names_to_identifiers = {
 
 with st.expander("About this app"):
     st.write(f"""
-    This Chatbot app allows users to interact with various models including the new LLM models hosted on DeepInfra's OpenAI compatible API.
-    For more info, you can refer to [DeepInfra's documentation](https://deepinfra.com/docs/advanced/openai_api).
-
-    💡 For decent answers, you'd want to increase the `Max Tokens` value from `100` to `500`. 
+    1-Upload your file as txt or csv file. Each file contains one sample in the each row.\n
+    2-Choose your task (movie or hotel review)
+    3-Choose your model according to your task analysis (negative or positive).\n
+    4-And model predict your text files. \n
+    5-Download your test results.
     """)
 
 st.text('')
@@ -55,7 +56,7 @@ uploaded_file = st.file_uploader(
     help="Scanned documents are not supported yet!",
 )
 
-if not uploaded_file:
+if not uploaded_file or not hf_key:
     st.stop()
 
 

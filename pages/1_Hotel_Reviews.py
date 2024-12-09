@@ -51,10 +51,9 @@ st.write(f"Model being used: `{model_display_name}`")
 
 with st.expander("About this app"):
     st.write(f"""
-    This Chatbot app allows users to interact with various models including the new LLM models hosted on DeepInfra's OpenAI compatible API.
-    For more info, you can refer to [DeepInfra's documentation](https://deepinfra.com/docs/advanced/openai_api).
-
-    💡 For decent answers, you'd want to increase the `Max Tokens` value from `100` to `500`. 
+    Choose your model for hotel review analysis (negative or positive).\n
+    Enter your sample text.\n
+    And model predict your text's result.
     """)
 
 comment = st.text_input("Enter your text for analysis")#User input
