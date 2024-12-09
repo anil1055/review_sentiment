@@ -30,6 +30,12 @@ formatted_names_to_identifiers = {
 # Debug to ensure names are formatted correctly
 #st.write("Formatted Model Names to Identifiers:", formatted_names_to_identifiers
 
+with st.expander("About this app"):
+    st.write(f"""
+    1-Choose your model for hotel review analysis (negative or positive).\n
+    2-Enter your sample text.\n
+    3-And model predict your text's result.
+    """)
 
 model_name: str = st.selectbox("Model", options=MODEL_HOTELS)
 selected_model = MODEL_HOTEL[model_name]
@@ -49,12 +55,6 @@ pipe = pipeline("text-classification", model=selected_model, token=access_token)
 model_display_name = selected_model  # Already formatted
 st.write(f"Model being used: `{model_display_name}`")
 
-with st.expander("About this app"):
-    st.write(f"""
-    Choose your model for hotel review analysis (negative or positive).\n
-    Enter your sample text.\n
-    And model predict your text's result.
-    """)
 
 comment = st.text_input("Enter your text for analysis")#User input
 

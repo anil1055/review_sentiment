@@ -27,6 +27,13 @@ formatted_names_to_identifiers = {
     format_model_name(key): key for key in MODEL_MOVIE.keys()
 }
 
+with st.expander("About this app"):
+    st.write(f"""
+    1-Choose your model for movie review analysis (negative or positive).\n
+    2-Enter your sample text.\n
+    3-And model predict your text's result. 
+    """)
+    
 # Debug to ensure names are formatted correctly
 #st.write("Formatted Model Names to Identifiers:", formatted_names_to_identifiers)
 
@@ -43,14 +50,6 @@ pipe = pipeline("text-classification", model=selected_model, token=access_token)
 #from transformers import AutoTokenizer, AutoModelForSequenceClassification
 #tokenizer = AutoTokenizer.from_pretrained(selected_model)
 #pipe = AutoModelForSequenceClassification.from_pretrained(pretrained_model_name_or_path=selected_model)
-
-
-with st.expander("About this app"):
-    st.write(f"""
-    Choose your model for movie review analysis (negative or positive).\n
-    Enter your sample text.\n
-    And model predict your text's result. 
-    """)
 
 comment = st.text_input("Enter your text for analysis")#User input
 
