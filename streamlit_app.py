@@ -7,6 +7,7 @@ with st.sidebar:
     st.page_link('streamlit_app.py', label='Movie Reviews', icon='🔥')
     st.page_link('pages/1_Hotel_Reviews.py', label='Hotel Reviews', icon='🔥')
     st.page_link('pages/2_File_Upload.py', label='File Upload', icon='🔥')
+    hf_key = st.text_input("HuggingFace Access Key", key="hf_key", type="password")
 
 MODEL_MOVIE = {
     "albert": "anilguven/albert_tr_turkish_movie_reviews",  # Add the emoji for the Meta-Llama model
@@ -35,7 +36,11 @@ formatted_names_to_identifiers = {
 model_name: str = st.selectbox("Model", options=MODEL_MOVIES)
 selected_model = MODEL_MOVIE[model_name]
 
-access_token = "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"
+if not hf_key:
+    st.info("Please add your HuggingFace Access Key to continue.")
+    st.stop()
+
+access_token = hf_key
 pipe = pipeline("text-classification", model=selected_model, token=access_token)
 
 #from transformers import AutoTokenizer, AutoModelForSequenceClassification
